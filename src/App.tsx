@@ -69,48 +69,61 @@ export default function App() {
   const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
   const [flippedId, setFlippedId] = React.useState<string | null>(null);
 
+  const heroImages = [
+    'https://dduddeo.uk/justdie/e/10.webp',
+    'https://dduddeo.uk/justdie/e/2.webp',
+    'https://dduddeo.uk/justdie/e/7.webp',
+    'https://dduddeo.uk/justdie/e/23.webp'
+  ];
+  const [heroBgIdx, setHeroBgIdx] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroBgIdx((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="bg-[#0b0f19] text-slate-200 min-h-screen font-sans selection:bg-slate-700 selection:text-white">
-      {/* Background Animated Gradient / Fog */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-fog" />
-      {/* Cyber/Office Grid */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-grid opacity-50 mix-blend-screen" />
-      {/* Scan Line */}
-      <div className="scan-line" />
 
       {/* 1. Hero Section */}
-      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, scale: 1.5, rotate: 10 }}
-          animate={{ opacity: 1, scale: 1, rotate: -3 }}
-          transition={{ type: "spring", stiffness: 200, damping: 10, delay: 0.5 }}
-          className="mb-10"
-        >
-          <span className="stamp-effect text-2xl md:text-4xl font-serif">
-            결재 반려: 수명 산정 오류
-          </span>
-        </motion.div>
+      <section className="relative z-10 min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center p-6 text-center overflow-hidden bg-[#0b0f19]">
+        {/* Subtle background image for the hero */}
+        <div className="absolute inset-0 z-0">
+          {heroImages.map((img, idx) => (
+            <img
+              key={img}
+              src={img}
+              alt={`Background ${idx}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out mix-blend-luminosity ${idx === heroBgIdx ? 'opacity-40' : 'opacity-0'}`}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f19]/20 via-[#0b0f19]/60 to-[#0b0f19]" />
+        </div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="text-center font-bold mb-6 tracking-tight flex flex-col items-center justify-center w-full"
+          transition={{ duration: 1, delay: 0.3 }}
+          className="text-center font-bold mb-8 tracking-tight flex flex-col items-center justify-center w-full z-10"
         >
-          <span className="block text-slate-400 text-xl md:text-3xl mb-6 font-normal font-sans tracking-wider">누구나 한 번쯤 겪는 흔한 일이라니까요!</span>
-          <span className="block mt-2 border-b-2 border-slate-700 pb-8 px-4 font-serif font-black text-slate-100 text-[11vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7.5vw] whitespace-nowrap leading-none drop-shadow-2xl">
-            그냥 죽어주면 안될까?
+          <span className="block text-white/80 text-xs md:text-sm mb-6 font-normal font-sans tracking-[0.3em] uppercase">
+            누구나 한 번쯤 겪는 흔한 일이라니까요!
+          </span>
+          <span className="block mt-2 font-cute text-white text-[15vw] sm:text-7xl md:text-8xl lg:text-9xl leading-[1.2] max-w-full break-keep whitespace-pre-wrap px-2 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+            그냥 죽어주면<br className="sm:hidden" /> 안될까?
           </span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="mt-6 text-xl text-slate-300 max-w-xl leading-relaxed font-medium tracking-tight"
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mt-6 text-sm md:text-lg text-white/70 max-w-2xl leading-relaxed font-sans font-light tracking-wide z-10"
         >
-          저승관리국 9급 조사관의 치명적 서류 실수.
-          <br />졸지에 사망 처리된 당신의 7일간 기묘한 인턴 생활이 시작됩니다.
+          저승관리국 9급 조사관의 치명적 서류 실수.<br />
+          졸지에 사망 처리된 당신의 7일간 기묘한 인턴 생활이 시작됩니다.
         </motion.p>
       </section>
 
@@ -261,7 +274,7 @@ export default function App() {
                   {/* Front: Document Folder Look */}
                   <div className="absolute inset-0 w-full h-full rounded overflow-hidden border border-slate-700 bg-[#161b26] backface-hidden flex flex-col shadow-lg">
                     <div className="h-4/5 w-full relative bg-slate-800">
-                      <img src={char.img} alt={char.name} className="w-full h-full object-cover object-top opacity-60 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-500" />
+                      <img src={char.img} alt={char.name} className="w-full h-full object-cover object-top opacity-100 mix-blend-normal md:opacity-60 md:mix-blend-luminosity md:group-hover:mix-blend-normal md:group-hover:opacity-100 transition-all duration-500" />
                       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-current to-transparent ${char.accent} border-t`} />
                     </div>
                     <div className="p-5 flex-1 flex flex-col justify-start relative bg-slate-900 border-t border-slate-800">
@@ -298,7 +311,7 @@ export default function App() {
                     <div className="flex-1 flex gap-2 overflow-hidden mt-2">
                       {char.extraImgs.map((img, idx) => (
                         <div key={idx} className="flex-1 bg-slate-800 rounded border border-slate-700 overflow-hidden relative">
-                          <img src={img} alt={`${char.name} 사진 ${idx + 1}`} className="w-full h-full object-cover object-top opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all" />
+                          <img src={img} alt={`${char.name} 사진 ${idx + 1}`} className="w-full h-full object-cover object-top opacity-100 mix-blend-normal md:opacity-80 md:mix-blend-luminosity md:hover:mix-blend-normal md:hover:opacity-100 transition-all" />
                         </div>
                       ))}
                     </div>
@@ -395,17 +408,31 @@ export default function App() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="flex gap-6 items-start"
+              className="flex gap-6 items-start flex-col md:flex-row w-full"
             >
               <div className="w-16 h-16 rounded bg-slate-800 flex items-center justify-center shrink-0 border border-slate-700 text-slate-400">
                 <Sun className="w-7 h-7" />
               </div>
-              <div className="bg-[#111520] p-8 rounded border border-slate-700 flex-1 relative overflow-hidden group hover:border-slate-500 transition-colors shadow-lg">
-                <h3 className="text-xl font-bold mb-3 text-slate-200 font-serif">주간 업무: 저승관리국 인턴</h3>
-                <p className="text-slate-300 leading-relaxed font-sans font-medium tracking-tight">
-                  매일 아침, 각기 다른 부서를 돌며 상사들을 보조합니다. 쏟아지는 영혼 분류 서류, 부서 간의 기싸움, 
-                  그리고 덜렁대는 김보라의 사고를 수습하며 좌충우돌 오피스 코미디를 경험하세요.
-                </p>
+              <div className="bg-[#111520] p-6 md:p-8 rounded border border-slate-700 flex-1 relative overflow-hidden group hover:border-slate-500 transition-colors shadow-lg w-full">
+                <h3 className="text-xl font-bold mb-4 text-slate-200 font-serif border-b border-slate-800 pb-3">주간 업무: 저승관리국 인턴</h3>
+                
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="bg-slate-800/50 p-4 rounded border border-slate-700/50">
+                    <div className="w-8 h-8 bg-slate-900 rounded mb-3 flex items-center justify-center border border-slate-700 text-slate-400 font-mono text-sm">1</div>
+                    <h4 className="font-bold text-slate-200 mb-1 text-sm">서류 & 분류</h4>
+                    <p className="text-xs text-slate-400 font-sans">쏟아지는 영혼 분류 서류 보조 작업</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-4 rounded border border-slate-700/50">
+                    <div className="w-8 h-8 bg-slate-900 rounded mb-3 flex items-center justify-center border border-slate-700 text-slate-400 font-mono text-sm">2</div>
+                    <h4 className="font-bold text-slate-200 mb-1 text-sm">결재 순회</h4>
+                    <p className="text-xs text-slate-400 font-sans">안내데스크 등 부서 간 도장 수합</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-4 rounded border border-slate-700/50">
+                    <div className="w-8 h-8 bg-slate-900 rounded mb-3 flex items-center justify-center border border-slate-700 text-slate-400 font-mono text-sm">3</div>
+                    <h4 className="font-bold text-slate-200 mb-1 text-sm">사고 수습</h4>
+                    <p className="text-xs text-slate-400 font-sans">덜렁대는 김보라 선배 뒷수습</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
@@ -414,17 +441,31 @@ export default function App() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="flex gap-6 items-start flex-row-reverse"
+              className="flex gap-6 items-start flex-col md:flex-row-reverse w-full"
             >
               <div className="w-16 h-16 rounded bg-slate-800 flex items-center justify-center shrink-0 border border-slate-700 text-slate-400">
                 <Moon className="w-7 h-7" />
               </div>
-              <div className="bg-[#111520] p-8 rounded border border-slate-700 flex-1 relative overflow-hidden group hover:border-slate-500 transition-colors text-right shadow-lg">
-                <h3 className="text-xl font-bold mb-3 text-slate-200 font-serif">야간 일과: 김보라의 관사</h3>
-                <p className="text-slate-300 leading-relaxed font-sans font-medium tracking-tight">
-                  퇴근 후엔 당신을 실수로 데려온 원흉, 김보라와 아슬아슬한 동거가 시작됩니다. 
-                  우당탕탕 일상 속에서 점차 가까워지는 관계, 그리고 밤이 깊어질수록 드러나는 저승의 이면을 마주하세요.
-                </p>
+              <div className="bg-[#111520] p-6 md:p-8 rounded border border-slate-700 flex-1 relative overflow-hidden group hover:border-slate-500 transition-colors md:text-right shadow-lg w-full">
+                <h3 className="text-xl font-bold mb-4 text-slate-200 font-serif border-b border-slate-800 pb-3">야간 일과: 김보라의 관사</h3>
+                
+                <div className="grid md:grid-cols-3 gap-4 text-left">
+                  <div className="bg-slate-800/50 p-4 rounded border border-slate-700/50">
+                    <div className="w-8 h-8 bg-slate-900 rounded mb-3 flex items-center justify-center border border-slate-700 text-slate-400 font-mono text-sm">1</div>
+                    <h4 className="font-bold text-slate-200 mb-1 text-sm">관사 동반 퇴근</h4>
+                    <p className="text-xs text-slate-400 font-sans">당신을 데려온 원흉과의 동거</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-4 rounded border border-slate-700/50">
+                    <div className="w-8 h-8 bg-slate-900 rounded mb-3 flex items-center justify-center border border-slate-700 text-slate-400 font-mono text-sm">2</div>
+                    <h4 className="font-bold text-slate-200 mb-1 text-sm">우당탕탕 일상</h4>
+                    <p className="text-xs text-slate-400 font-sans">기묘한 저승의 밤과 조금씩 가까워지는 관계</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-4 rounded border border-slate-700/50">
+                    <div className="w-8 h-8 bg-slate-900 rounded mb-3 flex items-center justify-center border border-slate-700 text-slate-400 font-mono text-sm">3</div>
+                    <h4 className="font-bold text-slate-200 mb-1 text-sm">사연 파악</h4>
+                    <p className="text-xs text-slate-400 font-sans">밤이 깊어갈수록 드러나는 이면들</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
