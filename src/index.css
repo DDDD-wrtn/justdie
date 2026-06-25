@@ -1,0 +1,93 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Noto Serif KR", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+body {
+  background-color: #0b0f19;
+  color: #cbd5e1;
+  overflow-x: hidden;
+}
+
+@keyframes fogMove {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.bg-fog {
+  background: radial-gradient(circle at center, rgba(46, 56, 86, 0.3) 0%, rgba(11, 15, 25, 1) 70%);
+  background-size: 200% 200%;
+  animation: fogMove 20s ease-in-out infinite;
+}
+
+.bg-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+.scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15vh;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.1), transparent);
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(200vh); }
+}
+
+.stamp-effect {
+  border: 3px solid #ef4444;
+  color: #ef4444;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transform: rotate(-3deg);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+  mix-blend-mode: screen;
+  box-shadow: 0 0 10px rgba(239,68,68,0.2), inset 0 0 10px rgba(239,68,68,0.2);
+}
+
+.stamp-approved {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59,130,246,0.2), inset 0 0 10px rgba(59,130,246,0.2);
+}
+
+.stamp-rejected {
+  border-color: #ef4444;
+  color: #ef4444;
+  box-shadow: 0 0 10px rgba(239,68,68,0.2), inset 0 0 10px rgba(239,68,68,0.2);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+

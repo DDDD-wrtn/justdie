@@ -1,0 +1,6 @@
+{
+  "name": "그냥 죽어주면 안될까",
+  "description": "현대 관료주의 오피스와 저승이 만난 미스터리 코미디 캐릭터챗 랜딩 페이지.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
