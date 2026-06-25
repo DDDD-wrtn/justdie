@@ -490,38 +490,65 @@ export default function App() {
       </section>
 
       {/* 5. Footer CTA */}
-      <footer className="relative z-10 py-32 px-6 text-center border-t border-slate-800 bg-[#0b0f19]">
-        <div className="max-w-2xl mx-auto relative">
-          <ArchiveRestore className="w-12 h-12 mx-auto mb-6 text-slate-600" />
-          
-          <div className="relative inline-block mb-12">
-            <motion.div 
-              initial={{ opacity: 0, scale: 2 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.2 }}
-              className="absolute -top-12 -right-20 z-20 rotate-[12deg] pointer-events-none"
-            >
-              <span className="stamp-effect stamp-rejected text-xl md:text-2xl font-serif whitespace-nowrap bg-[#0b0f19]/50">기밀 유지 서약 필요</span>
-            </motion.div>
-            <h2 className="text-3xl md:text-4xl font-bold font-serif text-slate-200 relative z-10">서류를 제출하시겠습니까?</h2>
-          </div>
-          
-          <br/>
-
-          <motion.a
-            href="https://crack.wrtn.ai/detail/6a3a6dbb58e9ad1e5b9252c9"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center justify-center px-10 py-4 bg-slate-200 hover:bg-white text-slate-900 rounded font-bold text-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+      <footer className="relative z-10 py-32 md:py-48 px-6 text-center bg-[#05070a] border-t border-slate-900">
+        <div className="max-w-3xl mx-auto flex flex-col items-center relative">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center border border-slate-800 mb-10 shadow-2xl"
           >
-            서명 및 시작
-          </motion.a>
-          <p className="mt-16 text-xs text-slate-600 font-mono">
-            © 2025 저승관리국. 분류 번호 849-XYZ. 무단 유출 시 징계.
-          </p>
+            <ArchiveRestore className="w-7 h-7 text-slate-400" />
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="relative mb-14"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold font-serif tracking-tight text-white mb-6 leading-tight">
+              운명을 결정할 시간입니다
+            </h2>
+            <p className="text-base md:text-xl text-slate-400 font-sans font-light tracking-wide max-w-xl mx-auto leading-relaxed">
+              당신의 수명 오류에 대한 이의를 제기하시겠습니까,<br className="hidden md:block" /> 아니면 이 기묘한 인턴십을 수락하시겠습니까?
+            </p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg"
+          >
+            <motion.a
+              href="https://crack.wrtn.ai/detail/6a3a6dbb58e9ad1e5b9252c9"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex-1 inline-flex items-center justify-center px-8 py-5 bg-white text-black font-bold text-lg hover:bg-slate-200 transition-colors duration-300 rounded-sm shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            >
+              인턴 계약 수락
+            </motion.a>
+            <button className="flex-1 px-8 py-5 bg-transparent border border-slate-700 text-slate-300 font-medium text-lg hover:bg-slate-800 transition-colors duration-300 rounded-sm relative overflow-hidden group">
+              <span className="relative z-10 group-hover:opacity-0 transition-opacity">이의 제기</span>
+              <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm text-slate-400">대기 인원: 8,492명</span>
+            </button>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-24 flex flex-col md:flex-row items-center gap-4 text-slate-600 font-mono text-xs uppercase tracking-widest border-t border-slate-800/50 pt-10 w-full justify-between"
+          >
+            <span>Form-99A / Underworld Admin</span>
+            <span>© 2025 저승관리국 기밀 유지 서약</span>
+          </motion.div>
         </div>
       </footer>
     </div>
